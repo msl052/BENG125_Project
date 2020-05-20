@@ -11,18 +11,21 @@ syms delta r a
 %a=  0.0476 % inverse of infection period in days
 
 % SIR equations
+
 s_dot=-r*S*I        % Susceptible
 i_dot=r*S*I-a*I     % Infected
 r_dot=a*I           % Removed
 
 % solving fixed points
       % with the time dimension from social distancing, may need to further consider what dimensions FP lie on. 
+
 s_dot==0 % set eqn equal to zero
 i_dot==0 % set eqn equal to zero
 
-sol_s_S=solve(s_dot,S) 
-sol_s_I=solve(s_dot,I) 
-sol_i_S=solve(i_dot,S) 
-sol_i_I=solve(i_dot,I) 
+sol_s_S=solve(s_dot,S) % fixed points for S when s_dot=0
+sol_s_I=solve(s_dot,I) % fixed points for I when s_dot=0
+sol_i_S=solve(i_dot,S) % fixed points for S when i_dot=0
+sol_i_I=solve(i_dot,I) % fixed points for I when i_dot=0
 
+FP(1) = [sol_s_S, sol]
 

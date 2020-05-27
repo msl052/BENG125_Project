@@ -98,6 +98,20 @@ legend(legend_texts);
 hold on;
 plot(t, y(:,2)+y(:,3));
 
+
+
+% plotting the populations relative to each other
+figure
+plot(y(:,1),y(:,5))
+ylabel('infected population')
+ylabel('susceptible population')
+title('SIR dynamics')
+
+%% Test space
+t=1:5
+q=20:2:29
+ans=ode_system(t,q,param)
+%%
 %-------------------------------------------------------------------------
 % User Section 4: Definition of the ODE system
 %-------------------------------------------------------------------------

@@ -34,7 +34,9 @@ initial.R = 0;	% set the initial value of 'R'
 %  
 % NOTE: Do not change the name 'param'!
 %
-param.beta = 1e-3; % set the parameter 'beta' of the model
+param.beta = 1e-3; % set the parameter 'beta' of the model 
+                %: STOCHASTIC: Consider param.beta as probability of
+                %infection
 param.r = 1e-1;    % set the parameter 'r' of the model
 param.g = 3e-4;
 param.p =(param.beta*initial.S-param.g*initial.F)/initial.A;
@@ -98,12 +100,6 @@ legend(legend_texts);
 hold on;
 plot(t, y(:,2)+y(:,3));
 
-% plotting the populations relative to each other
-plot(y(:,1),y(:,5))
-ylabel('infected population')
-ylabel('susceptible population')
-title('SIR
-
 %-------------------------------------------------------------------------
 % User Section 4: Definition of the ODE system
 %-------------------------------------------------------------------------
@@ -126,15 +122,17 @@ A = x(3);
 I = x(4);
 C = x(5);
 R = x(6);
-dS = -param.beta * S * I;
-dF = -param.g * F * I;
-dA = -param.p * A * I;
+dS = -param.beta * S * I
+dF = -param.g * F * I
+dA = -param.p * A * I
 %dI = +param.beta * S * I - param.r * I;
-dI = +param.g*F*I+param.p*A*I - param.r * I;
+dI = +param.g*F*I+param.p*A*I - param.r * I
 % Note: because S+I+R=constant, this equation could actually be omitted,
 % and R at any time point could simply be calculated as N-S-I.
-dC = +param.beta * S * I - param.r * I;
-dR = param.r * I;
+
+% in a given day, a random amount of people are infected...
+dC = +param.beta * S * I - param.r * I
+dR = param.r * I
 deriv = [dS;dF;dA;dI;dC;dR];
 end
 
